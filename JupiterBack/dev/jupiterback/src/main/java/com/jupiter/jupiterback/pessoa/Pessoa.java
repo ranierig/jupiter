@@ -17,6 +17,7 @@ public class Pessoa {
     private Boolean activate;
 
     public Pessoa(DadosCadastros dadosCadastros) {
+        this.activate = true;
         this.name = dadosCadastros.name();
         this.email = dadosCadastros.email();
         this.activate = dadosCadastros.activate();
@@ -25,5 +26,9 @@ public class Pessoa {
     public void atualizarInformacoes(DadosAtualizacao dados) {
         if (dados.name() != null) this.name = dados.name();
         if (dados.email() != null) this.email = dados.email();
+    }
+
+    public void excluir() {
+        this.activate = false;
     }
 }

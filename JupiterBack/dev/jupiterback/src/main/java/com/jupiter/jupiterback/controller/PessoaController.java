@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,8 +23,8 @@ public class PessoaController {
     }
 
     @GetMapping
-    public Page<DadosListaPessoa> listarPessoa(Pageable paginacao) {
-        return repository.findAll(paginacao).map(DadosListaPessoa::new);
+    public Page<DadosListaPessoa> listarPessoa(@PageableDefault(size = 10, sort = {"name"}) Pageable paginacao) {
+        return repository.findAllByActivateTrue(paginacao).map(DadosListaPessoa::new);
     }
 
     /*
@@ -43,7 +44,9 @@ public class PessoaController {
     @DeleteMapping("/{id}")
     @Transactional
     public void excluir(@PathVariable int id) {
-        repository.deleteById(id);
+        //repository.deleteById(id);
+        var pessoa = repository.getReferenceById(id);
+        pessoa.excluir();
     }
 
 }
