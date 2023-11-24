@@ -30,7 +30,8 @@ public class PessoaController {
     @GetMapping
     public List<DadosListaPessoa> listar() {
         return repository.findAll().stream().map(DadosListaPessoa::new).toList();
-    } */
+    }
+    */
 
     @PutMapping
     @Transactional
