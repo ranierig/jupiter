@@ -14,10 +14,12 @@ public class Pessoa {
     private int id;
     private String name;
     private String email;
+    private Boolean activate;
 
     public Pessoa(DadosCadastros dadosCadastros) {
         this.name = dadosCadastros.name();
         this.email = dadosCadastros.email();
+        this.activate = dadosCadastros.activate();
     }
 
     public void atualizarInformacoes(DadosAtualizacao dados) {
