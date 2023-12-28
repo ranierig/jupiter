@@ -20,15 +20,17 @@ public class Pessoa {
         this.activate = true;
         this.name = dadosCadastros.name();
         this.email = dadosCadastros.email();
-        this.activate = dadosCadastros.activate();
+       // this.activate = dadosCadastros.activate();
     }
 
     public void atualizarInformacoes(DadosAtualizacao dados) {
         if (dados.name() != null) this.name = dados.name();
         if (dados.email() != null) this.email = dados.email();
+        if (dados.activation()!= null) this.activate = dados.activation();
     }
 
     public void excluir() {
         this.activate = false;
+
     }
 }

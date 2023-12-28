@@ -7,7 +7,6 @@ public record DadosAtualizacao(
         int id,
         String name,
         String email,
-        @NotNull
         Boolean activation) {
 
 }

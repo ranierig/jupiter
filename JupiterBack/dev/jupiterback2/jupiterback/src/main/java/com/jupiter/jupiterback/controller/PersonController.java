@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/person")
 public class PersonController {
-    @PutMapping
-    public void PersonController (@RequestBody DataPerson person) {
+    @PostMapping
+    public void PersonController(@RequestBody DataPerson person) {
         System.out.println(person);
     }
 }
