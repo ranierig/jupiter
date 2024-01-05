@@ -19,7 +19,7 @@ export class AppComponent {
   ngOnInit() {
     this.service.getPosts()
       .subscribe(response => {
-        this.posts = response
-      })
+        this.posts = response;
+      });
   }
 }

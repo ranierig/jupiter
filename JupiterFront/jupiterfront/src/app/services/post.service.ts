@@ -1,5 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, map } from 'rxjs';
+
+
+interface Comment { content: Comment[] }
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +11,9 @@ import { Injectable } from '@angular/core';
 export class PostService {
  private url = 'http://localhost:8081/cadastrarpessoa';
   constructor(private httpClient: HttpClient) { }
-getPosts(){
-  return this.httpClient.get(this.url);
+getPosts(): Observable<Comment[]>{
+  return this.httpClient.get<Comment>(this.url)
+  .pipe(map(i => i.content));
 }
 
 }
