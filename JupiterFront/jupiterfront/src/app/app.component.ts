@@ -1,35 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { CadastroService } from './services/cadastro.service';
-import { iCadastro } from './types/iCadastros';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import { PostService } from './services/post.service';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-
-export class AppComponent implements OnInit {
-  
+export class AppComponent {
   title = 'jupiterfront';
-  cadastro = {} as iCadastro;
-  //cadastros: iCadastro[];
-  cadastros: iCadastro[] | undefined ;
+  posts: any;
+
+  constructor(private service:PostService) {}
   
-  constructor(private cadastroService: CadastroService) {
-  }
-
   ngOnInit() {
-    //this.obterCadastros();
-   this.cadastroService.obterCadastros()
-   //.subscribe(obterCadastros =>  this.cadastro = obterCadastros.body);
-   // throw new Error('Method not implemented.');
+    this.service.getPosts()
+      .subscribe(response => {
+        this.posts = response
+      })
   }
-
-    // Chama o serviço para obtém todos os carros
-    obterCadastros() {
-      this.cadastroService.obterCadastros().subscribe((cadastros: iCadastro[]) => {
-        this.cadastros = cadastros;
-      });
-    }
-
 }
