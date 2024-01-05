@@ -1,0 +1,21 @@
+<h3>CADASTRO</h3>
+<button (click)="ngOnInit">LISTAR</button>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">name</th>
+                <th scope="col">email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cadastro of cadastros">
+                <td>{{cadastro.id}}</td>
+                <td>{{cadastro.name}}</td>
+                <td>{{cadastro.email}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

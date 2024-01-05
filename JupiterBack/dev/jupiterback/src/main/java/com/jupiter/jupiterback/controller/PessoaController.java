@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("cadastrarpessoa")
+
 public class PessoaController {
     @Autowired
     private PessoaRepository repository;
@@ -21,7 +22,7 @@ public class PessoaController {
         repository.save(new Pessoa(dados));
         //System.out.println(dados);
     }
-
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping
     public Page<DadosListaPessoa> listarPessoa(@PageableDefault(size = 10, sort = {"name"}) Pageable paginacao) {
         return repository.findAllByActivateTrue(paginacao).map(DadosListaPessoa::new);
