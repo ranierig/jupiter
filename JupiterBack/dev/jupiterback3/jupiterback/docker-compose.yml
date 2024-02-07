@@ -1,0 +1,18 @@
+# spring-boot-docker/docker-compose.yml
+version: "3.7"
+services:
+  web-service:
+    container_name: JP_java3
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    expose:
+      - "4306"
+    networks:
+      - spring-boot-mysql-network
+networks:
+  spring-boot-mysql-network:
+    name: mars
+    driver: bridge
