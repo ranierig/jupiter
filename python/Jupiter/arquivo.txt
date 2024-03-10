@@ -1,0 +1,4 @@
+nome;idade;cidade;data atualização
+Ranieri; Uberlândia; 22/02/2024 14:32:25
+41 Ranieri Ituiutaba; 22/02/2024 14:32:25
+Jéssica Xavier;42; Uberlândia; 23/02/2024 17:43:23

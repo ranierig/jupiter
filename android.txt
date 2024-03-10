@@ -1,0 +1,25 @@
+npx react-native init caludi --version 0.65.1
+npx react-native start
+npx react-native run-android
+npx emulator -list-avds
+
+npm install --global yarn
+yarn global list
+npm -g list
+
+npm install -g react-native-cli
+npm install -g react-native
+
+npx react-native init ProjectName 
+npx react-native info
+
+
+
+import React from "react";
+import { SafeAreaView, Text} from 'react-native';
+
+function App() {
+  return <SafeAreaView><Text>Caludi</Text></SafeAreaView>
+}
+
+export default App;

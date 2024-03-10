@@ -1,0 +1,162 @@
+FROM mysql
+ENV MYSQL_ROOT_HOST=% \
+    MYSQL_ROOT_PASSWORD=123
+COPY init.sql /docker-entrypoint-initdb.d/1-init.sql
+
+# Definição de build para a imagem do Spring boot
+FROM openjdk:8-jdk-alpine as build
+
+WORKDIR /app
+
+COPY mvnw .
+COPY .mvn .mvn
+COPY pom.xml .
+
+RUN chmod +x ./mvnw
+# Faça o download das dependencias do pom.xml
+RUN ./mvnw dependency:go-offline -B
+
+COPY src src
+
+RUN ./mvnw package -DskipTests
+RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
+
+# Definição de produção para a imagem do Spring boot
+FROM openjdk:8-jre-alpine as production
+ARG DEPENDENCY=/app/target/dependency
+
+# Copiar as dependencias para o build artifact
+COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
+COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
+COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
+
+# Rodar a aplicação Spring boot
+ENTRYPOINT ["java", "-cp", "app:app/lib/*","com.community.wishlist.WishlistApplication"]
+
+
+
+
+
+----------------------------------------------------------------------
+FROM mysql
+ENV MYSQL_ROOT_HOST=% \
+    MYSQL_ROOT_PASSWORD=123
+COPY init.sql /docker-entrypoint-initdb.d/1-init.sql
+
+
+
+
+
+---------------------------------------------------------------
+# Use root/example as user/password credentials
+version: '3.1'
+services:
+  JP_mysql:
+    container_name: JP_mysql
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command:
+      --default-authentication-plugin=mysql_native_password
+      #--init-file /docker-entrypoint-initdb.d/1-init.sql
+    restart: always
+    environment:
+      DATABASE_HOST: JP_mysql
+      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+      #MYSQL_DATABASE: ${MYSQLDB_ROOT_DATABASE}
+    env_file:
+      - .env
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
+web-service:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - spring-boot-mysql-network
+    depends_on:
+      - mysql-service
+networks:
+  database:
+    external: true
+	
+	
+	
+	----------------------------------------------------------
+	npx react-native init caludi --version 0.65.1
+npx react-native start
+npx react-native run-android
+npx emulator -list-avds
+
+npm install --global yarn
+yarn global list
+npm -g list
+
+npm install -g react-native-cli
+npm install -g react-native
+
+npx react-native init ProjectName 
+npx react-native info
+
+
+
+import React from "react";
+import { SafeAreaView, Text} from 'react-native';
+
+function App() {
+  return <SafeAreaView><Text>Caludi</Text></SafeAreaView>
+}
+
+export default App;
+
+
+
+
+
+
+
+-------------------------------------
+
+# Use root/example as user/password credentials
+version: '3.1'
+services:
+  JP_mysql:
+    container_name: JP_mysql
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command:
+      --default-authentication-plugin=mysql_native_password
+      #--init-file /docker-entrypoint-initdb.d/1-init.sql
+    restart: always
+    environment:
+      DATABASE_HOST: JP_mysql
+      MYSQL_ROOT_PASSWORD: ${MYSQLDB_ROOT_PASSWORD}
+      #MYSQL_DATABASE: ${MYSQLDB_ROOT_DATABASE}
+    env_file:
+      - .env
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - ${MYSQLDB_LOCAL_PORT}:${MYSQLDB_DOCKER_PORT}
+networks:
+  database:
+    external: true

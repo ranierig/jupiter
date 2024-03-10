@@ -1,0 +1,11 @@
+import csv
+import sys
+
+nome_ficheiro = 'C:\\jupiter\\python\\Jupiter\\arquivo.csv'
+with open(nome_ficheiro, "r") as ficheiro:
+    reader = csv.reader(ficheiro, delimiter=';')
+    try:
+        for linha in reader:
+            print(linha)
+    except csv.Error as e:
+        sys.exit('ficheiro %s, linha %d: %s' % (nome_ficheiro, reader.line_num, e))

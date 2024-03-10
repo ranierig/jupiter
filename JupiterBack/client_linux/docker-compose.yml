@@ -1,25 +1,25 @@
-# spring-boot-docker/docker-compose.yml
-version: "3.7"
+# Use root/example as user/password credentials
+version: '3.5'
 services:
-  openjdk:
-    container_name: openjdk
-    image: openjdk
+  ubuntu:
+    container_name: ubuntu
+    image: ubuntu
+    tty: true
+    stdin_open: true
     build:
       context: .
-      dockerfile: dockerfile
-    ports:
-      - "8081:8081"
     networks:
       - spring-boot-mysql-network
+    ports:
+      - "3307:3307"
 networks:
   spring-boot-mysql-network:
-    name: mars
     external: true
+    name: mars
     driver: bridge
     ipam:
      config:
        - subnet: 192.168.100.0/24
          gateway: 192.168.100.1
          aux_addresses:
-          mysql: 192.168.100.40
-          apigw-tomcat: 192.168.100.41
+          ubuntu: 192.168.100.42
