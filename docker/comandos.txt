@@ -1,3 +1,8 @@
+
+docker-compose up
+docker-compose up --build
+
+
 -- node js --
 npm run dev
 docker build -t api-wallet .
@@ -5,10 +10,19 @@ docker run -dp 192.168.100.22:5002:5002 api-wallet
 
 docker ps
 
+docker stop e977d43efb39
+docker rm e977d43efb39
+
+docker image ls
+
+docker rmi f251de5b7951
+
+docker run --network net-wallet -dp 192.168.100.22:5002:5002 api-wallet
+
 -- netword docker --
 
 docker network create net-wallet
 
 -- mongoDb --
-docker run -d --name mongo-wallet --network net-wallet mongo
+docker run -d --name mongo-wallet -p 27017:27017 --network net-wallet mongo
 
