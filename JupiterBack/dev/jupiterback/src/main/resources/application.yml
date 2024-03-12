@@ -9,7 +9,7 @@ spring:
         sort-parameter: ordem
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: "jdbc:mysql://192.168.100.22:3306/db_jupiterdsv01?useSSL=false"
+    url: "jdbc:mysql://JP_mysql:3306/db_jupiterdsv01?useSSL=false"
     username: root
     password: 123
     tomcat:

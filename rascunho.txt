@@ -1,3 +1,32 @@
+mvn spring-boot:run
+mvnw install
+docker build .
+docker images
+docker build -t jupiterback/dockertestapp
+
+docker build .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------
 FROM mysql
 ENV MYSQL_ROOT_HOST=% \
     MYSQL_ROOT_PASSWORD=123

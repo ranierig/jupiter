@@ -1,0 +1,14 @@
+-- node js --
+npm run dev
+docker build -t api-wallet .
+docker run -dp 192.168.100.22:5002:5002 api-wallet
+
+docker ps
+
+-- netword docker --
+
+docker network create net-wallet
+
+-- mongoDb --
+docker run -d --name mongo-wallet --network net-wallet mongo
+
