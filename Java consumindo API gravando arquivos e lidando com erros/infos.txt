@@ -1,0 +1,7 @@
+https://omdbapi.com/
+https://www.omdbapi.com/?t=matrix&apikey=bcd08ef2
+
+query string
+JSON (JavaScript Object Notation) 
+API (Application Programming Interface)
+HTTP (Hypertext Transfer Protocol) 

@@ -43,3 +43,28 @@ networks:
          aux_addresses:
           mysql: 192.168.100.40
           apigw-tomcat: 192.168.100.41
+          
+          
+          
+          
+          
+          
+
+
+
+
+
+
+
+
+
+mvn spring-boot:run
+mvnw install
+docker build .
+docker images
+docker build -t jupiterback/dockertestapp
+
+docker build .
+
+
+

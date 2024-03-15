@@ -1,4 +1,7 @@
 
+
+
+
 docker-compose up
 docker-compose up --build
 
@@ -23,6 +26,32 @@ docker run --network net-wallet -dp 192.168.100.22:5002:5002 api-wallet
 
 docker network create net-wallet
 
+mvn spring-boot:run
+mvnw install
+docker build .
+docker images
+docker build -t jupiterback/dockertestapp
+
+docker build .
+
+
+
+
+
 -- mongoDb --
-docker run -d --name mongo-wallet -p 27017:27017 --network net-wallet mongo
+
+
+mvn spring-boot:run
+mvnw install
+docker build .
+docker images
+docker build -t jupiterback/dockertestapp
+
+docker build .
+
+
+
+
+
+
 
